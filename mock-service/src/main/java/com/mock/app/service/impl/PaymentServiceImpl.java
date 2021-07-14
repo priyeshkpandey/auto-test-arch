@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PaymentServiceImpl implements PaymentService {
     @Override
-    public void postPaymentToGateway(PaymentGateway paymentGateway, PaymentInfo paymentInfo) {
+    public void sendPaymentToGateway(PaymentGateway paymentGateway, PaymentInfo paymentInfo) {
 
     }
 
