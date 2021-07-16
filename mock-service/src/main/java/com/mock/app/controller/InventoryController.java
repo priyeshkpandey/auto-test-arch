@@ -5,10 +5,7 @@ import com.mock.app.model.User;
 import com.mock.app.model.responses.ProductInventoryResponse;
 import com.mock.app.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.mock.app.model.Endpoint.InventoryEndpoint.*;
 import static com.mock.app.model.Endpoint.PathVariable.PRODUCT_ID;
@@ -24,7 +21,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = USER_PRODUCT)
-    public void addProduct(final @RequestParam(USER_ID) Long userId, final @RequestParam(PRODUCT_ID) Long productId) {
+    public void addProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);
@@ -33,7 +30,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = USER_PRODUCT)
-    public void deleteProduct(final @RequestParam(USER_ID) Long userId, final @RequestParam(PRODUCT_ID) Long productId) {
+    public void deleteProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);
@@ -42,7 +39,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = USER_PRODUCT)
-    public ProductInventoryResponse getProductInventory(final @RequestParam(USER_ID) Long userId, final @RequestParam(PRODUCT_ID) Long productId) {
+    public ProductInventoryResponse getProductInventory(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);

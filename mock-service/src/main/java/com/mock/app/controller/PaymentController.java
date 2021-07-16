@@ -19,7 +19,7 @@ public class PaymentController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = SEND)
-    public void sendPaymentToGateway(final @RequestParam(PAYMENT_GATEWAY) String paymentGateway,
+    public void sendPaymentToGateway(final @PathVariable(PAYMENT_GATEWAY) String paymentGateway,
                                      final @RequestBody PaymentInfo paymentInfo) {
         this.paymentService.sendPaymentToGateway(PaymentGateway.valueOf(paymentGateway.toUpperCase()), paymentInfo);
     }

@@ -15,6 +15,11 @@ public final class Endpoint {
         public static final String PAYMENT_GATEWAY_PATH = "{" + PAYMENT_GATEWAY + "}";
     }
 
+    public static final class QueryParam {
+        private QueryParam() {}
+        public static final String QUERY = "q";
+    }
+
     public static final class Entity {
         public static final String PRODUCT = "/product";
         public static final String USER = "/user";
@@ -37,9 +42,20 @@ public final class Endpoint {
     }
 
     public static final class PaymentEndpoint {
+        private PaymentEndpoint() {}
         public static final String PAYMENT_ROOT = ROOT + "/pay";
         public static final String SEND = "/send" + "/" + PathVariable.PAYMENT_GATEWAY_PATH;
         public static final String SUCCESS = "/success";
         public static final String FAILURE = "/failure";
+    }
+
+    public static final class ShoppingEndpoint {
+        private ShoppingEndpoint() {}
+        public static final String SHOPPING_ROOT = ROOT + "/shop";
+        public static final String SEARCH = "/search";
+        public static final String USER_CART = USER + "/" + PathVariable.USER_ID_PATH + "/cart";
+        public static final String USER_CHECKOUT = USER + "/" + PathVariable.USER_ID_PATH + "/checkout";
+        public static final String USER_PAYMENT = USER + "/" + PathVariable.USER_ID_PATH + "/pay";
+        public static final String USER_ORDER = USER + "/" + PathVariable.USER_ID_PATH + "/order";
     }
 }
