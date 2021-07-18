@@ -1,9 +1,16 @@
 package com.mock.app.model.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "permissions")
+@Setter
+@Getter
+@NoArgsConstructor
 public class PermissionTable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,36 +24,4 @@ public class PermissionTable {
 
     @Column(name = "resource_type")
     private String resourceType;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getPermissionName() {
-        return permissionName;
-    }
-
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getResourceType() {
-        return resourceType;
-    }
-
-    public void setResourceType(String resourceType) {
-        this.resourceType = resourceType;
-    }
 }

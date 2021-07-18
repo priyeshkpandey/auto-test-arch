@@ -1,9 +1,17 @@
 package com.mock.app.model.entities;
 
+import com.mock.app.model.Product;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@Setter
+@Getter
+@NoArgsConstructor
 public class ProductTable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,43 +29,10 @@ public class ProductTable {
     @Column(name = "discount")
     private Float discount;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String permissionName) {
-        this.productName = permissionName;
-    }
-
-    public String getProductDescription() {
-        return productDescription;
-    }
-
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
-
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public Float getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Float discount) {
-        this.discount = discount;
+    public void cloneFromProduct(final Product product) {
+        this.setProductName(product.getProductName());
+        this.setProductDescription(product.getProductDescription());
+        this.setPrice(product.getPrice());
+        this.setDiscount(product.getDiscount());
     }
 }

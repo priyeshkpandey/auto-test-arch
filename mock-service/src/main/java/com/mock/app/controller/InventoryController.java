@@ -2,6 +2,8 @@ package com.mock.app.controller;
 
 import com.mock.app.model.Product;
 import com.mock.app.model.User;
+import com.mock.app.model.exceptions.InsufficientPermissionsException;
+import com.mock.app.model.exceptions.NoSuchProductException;
 import com.mock.app.model.responses.ProductInventoryResponse;
 import com.mock.app.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = USER_PRODUCT)
-    public void addProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
+    public void addProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) throws InsufficientPermissionsException {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);
@@ -30,7 +32,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = USER_PRODUCT)
-    public void deleteProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
+    public void deleteProduct(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) throws InsufficientPermissionsException {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);
@@ -39,7 +41,7 @@ public class InventoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = USER_PRODUCT)
-    public ProductInventoryResponse getProductInventory(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) {
+    public ProductInventoryResponse getProductInventory(final @PathVariable(USER_ID) Long userId, final @PathVariable(PRODUCT_ID) Long productId) throws InsufficientPermissionsException, NoSuchProductException {
         final User user = new User();
         final Product product = new Product();
         user.setId(userId);
