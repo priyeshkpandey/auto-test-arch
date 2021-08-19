@@ -52,6 +52,11 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <artifactId>auto-test-arch</artifactId>
+            <groupId>com.clean.project</groupId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
