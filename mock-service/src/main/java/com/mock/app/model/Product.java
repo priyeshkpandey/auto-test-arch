@@ -1,5 +1,6 @@
 package com.mock.app.model;
 
+import com.mock.app.model.entities.ProductTable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,12 @@ public class Product {
     private String productDescription;
     private Float price;
     private Float discount;
+
+    public void cloneFromProductTable(final ProductTable productTable) {
+        this.setId(productTable.getId());
+        this.setProductName(productTable.getProductName());
+        this.setProductDescription(productTable.getProductDescription());
+        this.setPrice(productTable.getPrice());
+        this.setDiscount(productTable.getDiscount());
+    }
 }

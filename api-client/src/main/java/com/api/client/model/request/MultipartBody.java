@@ -1,6 +1,6 @@
 package com.api.client.model.request;
 
-import com.gojek.api.MultipartI;
+import com.api.client.contract.MultipartI;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

@@ -3,7 +3,7 @@ package com.api.client.factory;
 public class APIClientFactoryBuilder {
     private static RestAssuredAPIClientFactory restAssuredAPIClientFactory;
 
-    public APIClientFactoryI getRestAssuredAPIClientFactory() {
+    public static APIClientFactoryI getRestAssuredAPIClientFactory() {
         if (null == restAssuredAPIClientFactory) {
             restAssuredAPIClientFactory = new RestAssuredAPIClientFactory();
         }

@@ -1,8 +1,8 @@
 package com.api.client.model.request;
 
-import com.gojek.api.APIRequestBody;
-import com.gojek.api.MultipartI;
-import com.gojek.api.RequestBodyType;
+import com.api.client.contract.APIRequestBody;
+import com.api.client.contract.MultipartI;
+import com.api.client.contract.RequestBodyType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
