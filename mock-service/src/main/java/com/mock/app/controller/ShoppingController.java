@@ -55,4 +55,11 @@ public class ShoppingController {
         user.setId(userId);
         return this.shoppingService.confirmOrder(user);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = USER_ORDER_FAIL)
+    public OrderConfirmationResponse failOrder(final @PathVariable(USER_ID) Long userId) {
+        final User user = new User();
+        user.setId(userId);
+        return this.shoppingService.failOrder(user);
+    }
 }

@@ -11,11 +11,24 @@ import com.mock.app.model.requests.PaymentGatewayRequest;
 import com.mock.app.service.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import static com.mock.app.model.Endpoint.PathVariable.USER_ID_PATH;
+import static com.mock.app.model.Endpoint.ShoppingEndpoint.*;
 
 @Component
 public class PaymentServiceImpl implements PaymentService {
     private static final Logger LOG = LoggerFactory.getLogger(PaymentServiceImpl.class);
+
+    private String serverPort;
+    private String serverHostUrl;
+
+    public PaymentServiceImpl(final @Value("${server.host.url}") String serverHostUrl, final @Value("${server.port}") String serverPort) {
+        this.serverHostUrl = serverHostUrl;
+        this.serverPort = serverPort;
+    }
+
     @Override
     public void sendPaymentToGateway(PaymentGateway paymentGateway, PaymentInfo paymentInfo) {
         final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
@@ -39,16 +52,33 @@ public class PaymentServiceImpl implements PaymentService {
         paymentGatewayRequest.setAmount(paymentInfo.getAmount());
         paymentGatewayRequest.setDescription("Going to payment gateway " + paymentGateway.name());
         paymentGatewayRequest.setCallbackUrl(paymentGateway.getCallbackUrl());
+        paymentGatewayRequest.setUserId(paymentInfo.getUserId());
         return paymentGatewayRequest;
     }
 
     @Override
-    public void receiveSuccessPaymentResponse() {
+    public void receiveSuccessPaymentResponse(final String userId) {
         LOG.info("Payment successfully completed");
+        final String orderConfirmationUrl = this.serverHostUrl + ":" + this.serverPort + SHOPPING_ROOT
+                + USER_ORDER.replace(USER_ID_PATH, userId);
+        final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
+        final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.NONE).build();
+        final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())
+                .httpMethod(HttpMethod.POST).URL(orderConfirmationUrl).body(requestBody).build();
+        final APIResponse response = client.execute(request);
+        LOG.debug("Status for redirection to order confirmation: {}", response.getStatusCode());
     }
 
     @Override
-    public void receiveFailedPaymentResponse() {
+    public void receiveFailedPaymentResponse(final String userId) {
         LOG.error("Payment failed");
+        final String orderConfirmationUrl = this.serverHostUrl + ":" + this.serverPort + SHOPPING_ROOT
+                + USER_ORDER_FAIL.replace(USER_ID_PATH, userId);
+        final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
+        final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.NONE).build();
+        final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())
+                .httpMethod(HttpMethod.POST).URL(orderConfirmationUrl).body(requestBody).build();
+        final APIResponse response = client.execute(request);
+        LOG.debug("Status for redirection to order confirmation: {}", response.getStatusCode());
     }
 }

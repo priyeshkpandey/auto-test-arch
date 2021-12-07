@@ -15,4 +15,5 @@ public interface ShoppingService {
     public OrderSummaryResponse checkoutCart(final User user);
     public void initiatePayment(final User user);
     public OrderConfirmationResponse confirmOrder(final User user);
+    public OrderConfirmationResponse failOrder(final User user);
 }

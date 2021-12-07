@@ -16,16 +16,17 @@ public enum PaymentGateway {
 
     private String callbackUrl;
     private String serverPort;
+    private String serverUrl;
     PaymentGateway(final String callbackUrl) {
         this.callbackUrl = callbackUrl;
     }
 
     public String getUrl() {
-        return "http://localhost:" + this.serverPort + PAYMENT_GATEWAY_ROOT + RECEIVE;
+        return this.serverUrl + ":" + this.serverPort + PAYMENT_GATEWAY_ROOT + RECEIVE;
     }
 
     public String getCallbackUrl() {
-        return "http://localhost:" + this.serverPort + this.callbackUrl;
+        return this.serverUrl + ":" + this.serverPort + this.callbackUrl;
     }
 
     @Component
@@ -40,6 +41,7 @@ public enum PaymentGateway {
         public void setServerPort() {
             for (PaymentGateway paymentGateway : EnumSet.allOf(PaymentGateway.class)) {
                 paymentGateway.serverPort = this.injectedProps.getServerPort();
+                paymentGateway.serverUrl = this.injectedProps.getServerHostUrl();
             }
         }
     }

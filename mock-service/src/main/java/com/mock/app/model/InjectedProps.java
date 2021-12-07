@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class InjectedProps {
-    @Value("${server.port}")
+
     private String serverPort;
+    private String serverHostUrl;
+
+    public InjectedProps(final @Value("${server.host.url}") String serverHostUrl, final @Value("${server.port}") String serverPort) {
+        this.serverHostUrl = serverHostUrl;
+        this.serverPort = serverPort;
+    }
 }

@@ -57,5 +57,6 @@ public final class Endpoint {
         public static final String USER_CHECKOUT = USER + "/" + PathVariable.USER_ID_PATH + "/checkout";
         public static final String USER_PAYMENT = USER + "/" + PathVariable.USER_ID_PATH + "/pay";
         public static final String USER_ORDER = USER + "/" + PathVariable.USER_ID_PATH + "/order";
+        public static final String USER_ORDER_FAIL = USER_ORDER + "/fail";
     }
 }

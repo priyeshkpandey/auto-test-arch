@@ -45,25 +45,41 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public void addProductsInCart(User user, List<Product> products) {
-        if (null == USER_CART.get(user.getId())) {
+        final List<Product> cartProducts = USER_CART.get(user.getId());
+        if (null == cartProducts) {
             USER_CART.put(user.getId(), products);
         } else {
-            USER_CART.get(user.getId()).addAll(products);
+            cartProducts.addAll(products);
         }
     }
 
     @Override
     public OrderSummaryResponse checkoutCart(User user) {
-        return null;
+        final List<Product> cartProducts = USER_CART.get(user.getId());
+        final OrderSummaryResponse orderSummaryResponse = new OrderSummaryResponse();
+        orderSummaryResponse.setProducts(cartProducts);
+        Float totalPrice = 0f;
+        for (Product product : cartProducts) {
+            totalPrice += (product.getPrice() - product.getDiscount());
+        }
+        orderSummaryResponse.setTotalPrice(totalPrice);
+        return orderSummaryResponse;
     }
 
     @Override
     public void initiatePayment(User user) {
+        //TODO : Call send to payment gateway
+        final OrderSummaryResponse orderSummaryResponse = this.checkoutCart(user);
 
     }
 
     @Override
     public OrderConfirmationResponse confirmOrder(User user) {
+        return null;
+    }
+
+    @Override
+    public OrderConfirmationResponse failOrder(User user) {
         return null;
     }
 }

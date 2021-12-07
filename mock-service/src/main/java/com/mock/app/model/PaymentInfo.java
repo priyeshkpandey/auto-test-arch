@@ -11,4 +11,5 @@ public class PaymentInfo {
     private String method;
     private String currency;
     private Float amount;
+    private Long userId;
 }

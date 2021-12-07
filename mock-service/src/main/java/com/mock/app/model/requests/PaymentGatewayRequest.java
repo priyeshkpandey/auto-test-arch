@@ -14,4 +14,5 @@ public class PaymentGatewayRequest {
     private Float amount;
     private String gateway;
     private String callbackUrl;
+    private Long userId;
 }
