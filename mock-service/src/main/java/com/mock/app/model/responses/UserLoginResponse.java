@@ -8,4 +8,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class UserLoginResponse {
+    private Long userId;
+    private Boolean isLoginSuccess;
 }

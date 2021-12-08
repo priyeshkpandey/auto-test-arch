@@ -14,6 +14,5 @@ public interface ShoppingService {
     public void addProductsInCart(final User user, final List<Product> products);
     public OrderSummaryResponse checkoutCart(final User user);
     public void initiatePayment(final User user);
-    public OrderConfirmationResponse confirmOrder(final User user);
-    public OrderConfirmationResponse failOrder(final User user);
+    public Boolean orderPaymentStatus(final User user, final Long orderId);
 }

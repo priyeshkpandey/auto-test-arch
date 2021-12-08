@@ -1,14 +1,12 @@
 package com.mock.app.model;
 
 import com.mock.app.model.entities.ProductTable;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class Product {
     private Long id;

@@ -15,4 +15,5 @@ public class PaymentGatewayRequest {
     private String gateway;
     private String callbackUrl;
     private Long userId;
+    private Long orderId;
 }

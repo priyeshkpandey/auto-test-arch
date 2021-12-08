@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.mock.app.model.Endpoint.PathVariable.ORDER_ID;
 import static com.mock.app.model.Endpoint.PathVariable.USER_ID;
 import static com.mock.app.model.Endpoint.QueryParam.QUERY;
 import static com.mock.app.model.Endpoint.ShoppingEndpoint.*;
@@ -50,16 +51,10 @@ public class ShoppingController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = USER_ORDER)
-    public OrderConfirmationResponse confirmOrder(final @PathVariable(USER_ID) Long userId) {
+    public Boolean orderPaymentStatus(final @PathVariable(USER_ID) Long userId,
+                                                        final @PathVariable(ORDER_ID) Long orderId) {
         final User user = new User();
         user.setId(userId);
-        return this.shoppingService.confirmOrder(user);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = USER_ORDER_FAIL)
-    public OrderConfirmationResponse failOrder(final @PathVariable(USER_ID) Long userId) {
-        final User user = new User();
-        user.setId(userId);
-        return this.shoppingService.failOrder(user);
+        return this.shoppingService.orderPaymentStatus(user, orderId);
     }
 }

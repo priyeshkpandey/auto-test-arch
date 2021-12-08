@@ -7,26 +7,25 @@ import com.api.client.model.request.GenericAPIRequest;
 import com.api.client.model.request.GenericAPIRequestBody;
 import com.mock.app.model.PaymentGateway;
 import com.mock.app.model.PaymentInfo;
+import com.mock.app.model.entities.OrderTable;
 import com.mock.app.model.requests.PaymentGatewayRequest;
+import com.mock.app.repositories.OrderRepository;
 import com.mock.app.service.PaymentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static com.mock.app.model.Endpoint.PathVariable.USER_ID_PATH;
-import static com.mock.app.model.Endpoint.ShoppingEndpoint.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
 public class PaymentServiceImpl implements PaymentService {
     private static final Logger LOG = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
-    private String serverPort;
-    private String serverHostUrl;
+    private OrderRepository orderRepository;
 
-    public PaymentServiceImpl(final @Value("${server.host.url}") String serverHostUrl, final @Value("${server.port}") String serverPort) {
-        this.serverHostUrl = serverHostUrl;
-        this.serverPort = serverPort;
+    @Autowired
+    public PaymentServiceImpl(final OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @Override
@@ -57,28 +56,20 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void receiveSuccessPaymentResponse(final String userId) {
+    public void receiveSuccessPaymentResponse(final @RequestParam("orderId") String orderId) {
         LOG.info("Payment successfully completed");
-        final String orderConfirmationUrl = this.serverHostUrl + ":" + this.serverPort + SHOPPING_ROOT
-                + USER_ORDER.replace(USER_ID_PATH, userId);
-        final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
-        final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.NONE).build();
-        final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())
-                .httpMethod(HttpMethod.POST).URL(orderConfirmationUrl).body(requestBody).build();
-        final APIResponse response = client.execute(request);
-        LOG.debug("Status for redirection to order confirmation: {}", response.getStatusCode());
+        final OrderTable order = this.orderRepository.findById(Long.parseLong(orderId)).get();
+        order.setPaymentStatus(0);
+        this.orderRepository.saveAndFlush(order);
+        LOG.debug("Successfully updated order status for order : {}", orderId);
     }
 
     @Override
-    public void receiveFailedPaymentResponse(final String userId) {
+    public void receiveFailedPaymentResponse(final @RequestParam("orderId") String orderId) {
         LOG.error("Payment failed");
-        final String orderConfirmationUrl = this.serverHostUrl + ":" + this.serverPort + SHOPPING_ROOT
-                + USER_ORDER_FAIL.replace(USER_ID_PATH, userId);
-        final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
-        final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.NONE).build();
-        final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())
-                .httpMethod(HttpMethod.POST).URL(orderConfirmationUrl).body(requestBody).build();
-        final APIResponse response = client.execute(request);
-        LOG.debug("Status for redirection to order confirmation: {}", response.getStatusCode());
+        final OrderTable order = this.orderRepository.findById(Long.parseLong(orderId)).get();
+        order.setPaymentStatus(1);
+        this.orderRepository.saveAndFlush(order);
+        LOG.debug("Successfully updated order status for order : {}", orderId);
     }
 }

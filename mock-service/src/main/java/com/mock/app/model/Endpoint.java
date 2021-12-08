@@ -10,9 +10,11 @@ public final class Endpoint {
         public static final String USER_ID = "userId";
         public static final String PRODUCT_ID = "productId";
         public static final String PAYMENT_GATEWAY = "paymentGateway";
+        public static final String ORDER_ID = "orderId";
         public static final String USER_ID_PATH = "{" + USER_ID + "}";
         public static final String PRODUCT_ID_PATH = "{" + PRODUCT_ID + "}";
         public static final String PAYMENT_GATEWAY_PATH = "{" + PAYMENT_GATEWAY + "}";
+        public static final String ORDER_ID_PATH = "{" + ORDER_ID + "}";
     }
 
     public static final class QueryParam {
@@ -56,7 +58,6 @@ public final class Endpoint {
         public static final String USER_CART = USER + "/" + PathVariable.USER_ID_PATH + "/cart";
         public static final String USER_CHECKOUT = USER + "/" + PathVariable.USER_ID_PATH + "/checkout";
         public static final String USER_PAYMENT = USER + "/" + PathVariable.USER_ID_PATH + "/pay";
-        public static final String USER_ORDER = USER + "/" + PathVariable.USER_ID_PATH + "/order";
-        public static final String USER_ORDER_FAIL = USER_ORDER + "/fail";
+        public static final String USER_ORDER = USER + "/" + PathVariable.USER_ID_PATH + "/order" + "/" + PathVariable.ORDER_ID_PATH;
     }
 }

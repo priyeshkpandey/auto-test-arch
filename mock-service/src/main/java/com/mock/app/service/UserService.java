@@ -16,8 +16,4 @@ public interface UserService {
     public UserSignUpResponse signUpUser(final UserSignUpRequest userSignUpRequest);
     public UserLoginResponse logInUser(final UserLoginInRequest userLoginInRequest);
     public void logOutUser(final User user);
-    public User updateUser(final User user);
-    public void assignUserPermissions(final User user, final List<Permission> permissions);
-    public void assignUserRoles(final User user, final List<Role> roles);
-    public void deleteUser(final User user);
 }

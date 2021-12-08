@@ -20,7 +20,7 @@ public class PaymentGatewayServiceImpl implements PaymentGatewayService {
     @Override
     public void receivePaymentRequest(PaymentGatewayRequest paymentGatewayRequest) {
         final Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("userId", paymentGatewayRequest.getUserId().toString());
+        queryParams.put("orderId", paymentGatewayRequest.getOrderId().toString());
         final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
         final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.NONE).build();
         final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())

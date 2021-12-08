@@ -1,12 +1,18 @@
 package com.mock.app.service.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mock.app.model.Product;
 import com.mock.app.model.User;
+import com.mock.app.model.entities.OrderTable;
 import com.mock.app.model.entities.ProductTable;
 import com.mock.app.model.responses.OrderConfirmationResponse;
 import com.mock.app.model.responses.OrderSummaryResponse;
+import com.mock.app.repositories.OrderRepository;
 import com.mock.app.repositories.ProductRepository;
 import com.mock.app.service.ShoppingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +23,19 @@ import java.util.Map;
 
 @Component
 public class ShoppingServiceImpl implements ShoppingService {
+    private static final Logger LOG = LoggerFactory.getLogger(ShoppingServiceImpl.class);
     private static final Map<Long, List<Product>> USER_CART = new HashMap<>();
 
     private ProductRepository productRepository;
+    private OrderRepository orderRepository;
+    private ObjectMapper objectMapper;
 
     @Autowired
-    public ShoppingServiceImpl(final ProductRepository productRepository) {
+    public ShoppingServiceImpl(final ProductRepository productRepository,
+                               final OrderRepository orderRepository) {
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
+        this.objectMapper = new ObjectMapper();
     }
     @Override
     public List<Product> searchProducts(String query) {
@@ -68,18 +80,28 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public void initiatePayment(User user) {
-        //TODO : Call send to payment gateway
         final OrderSummaryResponse orderSummaryResponse = this.checkoutCart(user);
-
+        final OrderTable order = new OrderTable();
+        order.setUserId(user.getId());
+        order.setPaymentStatus(1);
+        try {
+            order.setProductsJson(this.objectMapper.writeValueAsString(orderSummaryResponse.getProducts()));
+            USER_CART.remove(user.getId());
+            LOG.debug("Successfully saved the order for the payment initialization");
+        } catch (JsonProcessingException e) {
+            LOG.error("Exception saving the order while payment initialization", e);
+        }
     }
 
     @Override
-    public OrderConfirmationResponse confirmOrder(User user) {
-        return null;
+    public Boolean orderPaymentStatus(User user, Long orderId) {
+        final List<OrderTable> userOrders = this.orderRepository.findOrderTableByUserId(user.getId());
+        for (OrderTable order : userOrders) {
+            if (order.getId().equals(orderId)) {
+                return (order.getPaymentStatus().equals(0));
+            }
+        }
+        return false;
     }
 
-    @Override
-    public OrderConfirmationResponse failOrder(User user) {
-        return null;
-    }
 }
