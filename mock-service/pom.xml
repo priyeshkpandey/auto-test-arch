@@ -53,7 +53,7 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <artifactId>api-client</artifactId>
+            <artifactId>restassured-api-client</artifactId>
             <groupId>com.clean.project</groupId>
             <version>${project.version}</version>
         </dependency>

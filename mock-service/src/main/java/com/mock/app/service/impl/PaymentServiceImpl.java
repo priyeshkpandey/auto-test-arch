@@ -2,9 +2,9 @@ package com.mock.app.service.impl;
 
 import com.api.client.auth.AuthFactoryBuilder;
 import com.api.client.contract.*;
-import com.api.client.factory.APIClientFactoryBuilder;
 import com.api.client.model.request.GenericAPIRequest;
 import com.api.client.model.request.GenericAPIRequestBody;
+import com.api.client.restassured.factory.RestAssuredAPIClientFactoryBuilder;
 import com.mock.app.model.PaymentGateway;
 import com.mock.app.model.PaymentInfo;
 import com.mock.app.model.entities.OrderTable;
@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void sendPaymentToGateway(PaymentGateway paymentGateway, PaymentInfo paymentInfo) {
-        final APIClient client = APIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
+        final APIClient client = RestAssuredAPIClientFactoryBuilder.getRestAssuredAPIClientFactory().get();
         final APIRequestBody requestBody = GenericAPIRequestBody.builder().type(RequestBodyType.OBJECT)
                 .object(buildPaymentGatewayRequest(paymentGateway, paymentInfo)).build();
         final APIRequest request = GenericAPIRequest.builder().auth(AuthFactoryBuilder.getNoneAuthFactory().get())
