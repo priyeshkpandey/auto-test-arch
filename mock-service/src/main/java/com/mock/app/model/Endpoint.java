@@ -27,14 +27,19 @@ public final class Endpoint {
         public static final String USER = "/user";
     }
     public static final class UserEndpoint {
+        private UserEndpoint(){}
+        public static final String USER_ROOT = ROOT + "/user";
 
+        public static final String USER_SIGNUP = "/signup";
+        public static final String USER_LOGIN = "/login";
+        public static final String USER_LOGOUT = "/logout" + "/" + PathVariable.USER_ID_PATH;
     }
     public static final class InventoryEndpoint {
         private InventoryEndpoint() {}
         public static final String INVENTORY_ROOT = ROOT + "/inv";
 
-        public static final String USER_PRODUCT = USER + "/" + PathVariable.USER_ID_PATH
-                + Entity.PRODUCT + "/" + PathVariable.PRODUCT_ID_PATH;
+        public static final String USER_PRODUCTS = USER + "/" + PathVariable.USER_ID_PATH + Entity.PRODUCT;
+        public static final String USER_PRODUCT = USER_PRODUCTS + "/" + PathVariable.PRODUCT_ID_PATH;
     }
 
     public static final class PaymentGatewayEndpoint {

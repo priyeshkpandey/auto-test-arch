@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserSignUpResponse signUpUser(UserSignUpRequest userSignUpRequest) {
         final UserTable user = new UserTable();
+        user.setId(userSignUpRequest.getId());
         user.setUserName(userSignUpRequest.getUserName());
         user.setPassword(userSignUpRequest.getPassword());
         user.setFirstName(userSignUpRequest.getFirstName());

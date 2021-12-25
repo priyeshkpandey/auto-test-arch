@@ -15,7 +15,6 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <okhttp.version>4.9.3</okhttp.version>
-        <apache.httpcomponents.version>4.4.13</apache.httpcomponents.version>
     </properties>
 
     <dependencies>

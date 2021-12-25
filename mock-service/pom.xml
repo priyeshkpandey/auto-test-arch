@@ -15,6 +15,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <start.class>com.mock.app.main.ApplicationRunner</start.class>
+        <spring.doc.version>1.6.0</spring.doc.version>
     </properties>
 
     <dependencyManagement>
@@ -56,6 +57,13 @@
             <groupId>com.clean.project</groupId>
             <version>${project.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${spring.doc.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

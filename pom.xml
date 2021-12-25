@@ -15,6 +15,7 @@
         <module>restassured-api-client</module>
         <module>okhttp-api-client</module>
         <module>webclient-api-client</module>
+        <module>mock-service-2</module>
     </modules>
 
     <properties>
@@ -23,6 +24,7 @@
         <lombok.version>1.18.20</lombok.version>
         <jackson.version>2.12.4</jackson.version>
         <spring.boot.version>2.5.2</spring.boot.version>
+        <apache.httpcomponents.version>4.4.13</apache.httpcomponents.version>
     </properties>
 
     <dependencies>
