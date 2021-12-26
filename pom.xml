@@ -15,6 +15,7 @@
         <module>restassured-api-client</module>
         <module>okhttp-api-client</module>
         <module>webclient-api-client</module>
+        <module>mock-service-docker</module>
     </modules>
 
     <properties>
