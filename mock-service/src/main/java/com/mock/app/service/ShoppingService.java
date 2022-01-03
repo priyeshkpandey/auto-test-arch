@@ -2,7 +2,6 @@ package com.mock.app.service;
 
 import com.mock.app.model.Product;
 import com.mock.app.model.User;
-import com.mock.app.model.responses.OrderConfirmationResponse;
 import com.mock.app.model.responses.OrderSummaryResponse;
 import org.springframework.stereotype.Service;
 

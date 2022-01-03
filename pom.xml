@@ -16,6 +16,7 @@
         <module>okhttp-api-client</module>
         <module>webclient-api-client</module>
         <module>mock-service-docker</module>
+        <module>common-util</module>
     </modules>
 
     <properties>
@@ -25,6 +26,7 @@
         <jackson.version>2.12.4</jackson.version>
         <spring.boot.version>2.5.2</spring.boot.version>
         <apache.httpcomponents.version>4.4.13</apache.httpcomponents.version>
+        <testng.version>7.4.0</testng.version>
     </properties>
 
     <dependencies>
@@ -33,6 +35,14 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

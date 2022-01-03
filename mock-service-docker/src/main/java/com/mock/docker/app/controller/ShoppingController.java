@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.mock.docker.app.model.Endpoint.PathVariable.ORDER_ID;
-import static com.mock.docker.app.model.Endpoint.PathVariable.USER_ID;
-import static com.mock.docker.app.model.Endpoint.QueryParam.QUERY;
-import static com.mock.docker.app.model.Endpoint.ShoppingEndpoint.*;
+import static com.util.constant.Endpoint.PathVariable.ORDER_ID;
+import static com.util.constant.Endpoint.PathVariable.USER_ID;
+import static com.util.constant.Endpoint.QueryParam.QUERY;
+import static com.util.constant.Endpoint.ShoppingEndpoint.*;
 
 @RestController(SHOPPING_ROOT)
 public class ShoppingController {

@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userSignUpRequest.getFirstName());
         user.setLastName(userSignUpRequest.getLastName());
         user.setRoleName("customer");
+        user.setPermissionName("customer");
         final UserTable createdUser = this.userRepository.saveAndFlush(user);
         final UserSignUpResponse userSignUpResponse = new UserSignUpResponse();
         userSignUpResponse.setUserId(createdUser.getId());

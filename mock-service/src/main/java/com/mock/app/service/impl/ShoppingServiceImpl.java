@@ -6,7 +6,6 @@ import com.mock.app.model.Product;
 import com.mock.app.model.User;
 import com.mock.app.model.entities.OrderTable;
 import com.mock.app.model.entities.ProductTable;
-import com.mock.app.model.responses.OrderConfirmationResponse;
 import com.mock.app.model.responses.OrderSummaryResponse;
 import com.mock.app.repositories.OrderRepository;
 import com.mock.app.repositories.ProductRepository;

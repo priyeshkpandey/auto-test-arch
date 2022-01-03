@@ -66,7 +66,6 @@ public class ApacheClient implements APIClient {
         url = request.getURL();
         init();
         configAuth(request.getAuth());
-        addHeaders(request.getHeaders());
         addQueryParams(request.getQueryParams());
         addPathParams(request.getPathParams());
         addBody(request.getBody());
@@ -96,10 +95,27 @@ public class ApacheClient implements APIClient {
                 }
                 break;
         }
+        addHeaders(request.getHeaders());
         httpClient = httpClientBuilder.build();
         CloseableHttpResponse response = null;
+        APIResponse apiResponse = null;
         try {
             response = httpClient.execute(httpRequest);
+            if (null != response) {
+                try {
+                    apiResponse = GenericAPIResponse.builder()
+                            .status(response.getStatusLine().getReasonPhrase())
+                            .statusCode(String.valueOf(response.getStatusLine().getStatusCode()))
+                            .object(EntityUtils.toString(response.getEntity()))
+                            .build();
+                    LOG.info(apiResponse.getObject().toString());
+                } catch (IOException e) {
+                    LOG.error("Exception while extracting response. ", e);
+                    apiResponse = GenericAPIResponse.builder().status("ERROR").statusCode(e.getMessage()).build();
+                }
+            } else {
+                apiResponse = GenericAPIResponse.builder().status("NULL").statusCode("NULL").build();
+            }
         } catch (IOException e) {
             LOG.error("Exception in execution. ", e);
         } finally {
@@ -114,23 +130,6 @@ public class ApacheClient implements APIClient {
 
             }
 
-        }
-        APIResponse apiResponse = null;
-        if (null != response) {
-            try {
-                apiResponse = GenericAPIResponse.builder()
-                        .status(response.getStatusLine().getReasonPhrase())
-                        .statusCode(String.valueOf(response.getStatusLine().getStatusCode()))
-                        .object(new BufferedReader(new InputStreamReader(response.getEntity().getContent()))
-                                .lines().parallel().collect(Collectors.joining("\n"))
-                        )
-                        .build();
-            } catch (IOException e) {
-                LOG.error("Exception while extracting response. ", e);
-                apiResponse = GenericAPIResponse.builder().status("ERROR").statusCode(e.getMessage()).build();
-            }
-        } else {
-            apiResponse = GenericAPIResponse.builder().status("NULL").statusCode("NULL").build();
         }
         return apiResponse;
     }
@@ -219,6 +218,7 @@ public class ApacheClient implements APIClient {
         if (null != requestBody.getObject()) {
             try {
                 entity = new StringEntity(new ObjectMapper().writeValueAsString(requestBody.getObject()));
+                ((StringEntity)(entity)).setContentType("application/json");
             } catch (UnsupportedEncodingException | JsonProcessingException e) {
                 LOG.error("Exception creating entity. ", e);
             }

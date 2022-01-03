@@ -78,8 +78,6 @@ public class RestAssuredClient implements APIClient {
                 restAssuredResponse = requestSpecification.patch(request.getURL());
                 break;
         }
-        final Instant finish = Instant.now();
-        final long timeElapsed = Duration.between(start, finish).toMillis();
         APIResponse response = GenericAPIResponse.builder()
                 .status(restAssuredResponse.getStatusLine())
                 .statusCode(String.valueOf(restAssuredResponse.getStatusCode()))

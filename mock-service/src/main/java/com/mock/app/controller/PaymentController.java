@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import static com.mock.app.model.Endpoint.PathVariable.PAYMENT_GATEWAY;
-import static com.mock.app.model.Endpoint.PathVariable.USER_ID;
-import static com.mock.app.model.Endpoint.PaymentEndpoint.*;
+import static com.util.constant.Endpoint.PathVariable.PAYMENT_GATEWAY;
+import static com.util.constant.Endpoint.PathVariable.USER_ID;
+import static com.util.constant.Endpoint.PaymentEndpoint.*;
 
 @RestController(PAYMENT_ROOT)
 public class PaymentController {

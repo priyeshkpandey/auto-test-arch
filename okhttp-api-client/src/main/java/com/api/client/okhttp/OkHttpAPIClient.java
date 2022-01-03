@@ -94,8 +94,20 @@ public class OkHttpAPIClient implements APIClient {
                 break;
         }
         Response response = null;
+        APIResponse apiResponse = null;
         try {
             response = clientBuilder.build().newCall(this.request).execute();
+            if (null != response) {
+                apiResponse = GenericAPIResponse.builder()
+                        .status(response.message())
+                        .statusCode(String.valueOf(response.code()))
+                        .object(new BufferedReader(new InputStreamReader(response.body().byteStream()))
+                                .lines().parallel().collect(Collectors.joining("\n"))
+                        )
+                        .build();
+            } else {
+                apiResponse = GenericAPIResponse.builder().status("NULL").statusCode("NULL").build();
+            }
         } catch (IOException e) {
             LOG.error("Exception executing the request. ", e);
         } finally {
@@ -103,18 +115,7 @@ public class OkHttpAPIClient implements APIClient {
                 response.close();
             }
         }
-        APIResponse apiResponse = null;
-        if (null != response) {
-            apiResponse = GenericAPIResponse.builder()
-                    .status(response.message())
-                    .statusCode(String.valueOf(response.code()))
-                    .object(new BufferedReader(new InputStreamReader(response.body().byteStream()))
-                            .lines().parallel().collect(Collectors.joining("\n"))
-                    )
-                    .build();
-        } else {
-            apiResponse = GenericAPIResponse.builder().status("NULL").statusCode("NULL").build();
-        }
+
         return apiResponse;
     }
 

@@ -1,6 +1,6 @@
-package com.mock.docker.app.model;
+package com.util.constant;
 
-import static com.mock.docker.app.model.Endpoint.Entity.USER;
+import static com.util.constant.Endpoint.Entity.USER;
 
 public final class Endpoint {
     private Endpoint() {}

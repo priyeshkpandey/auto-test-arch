@@ -2,7 +2,6 @@ package com.mock.app.controller;
 
 import com.mock.app.model.Product;
 import com.mock.app.model.User;
-import com.mock.app.model.responses.OrderConfirmationResponse;
 import com.mock.app.model.responses.OrderSummaryResponse;
 import com.mock.app.service.ShoppingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.mock.app.model.Endpoint.PathVariable.ORDER_ID;
-import static com.mock.app.model.Endpoint.PathVariable.USER_ID;
-import static com.mock.app.model.Endpoint.QueryParam.QUERY;
-import static com.mock.app.model.Endpoint.ShoppingEndpoint.*;
+import static com.util.constant.Endpoint.PathVariable.ORDER_ID;
+import static com.util.constant.Endpoint.PathVariable.USER_ID;
+import static com.util.constant.Endpoint.QueryParam.QUERY;
+import static com.util.constant.Endpoint.ShoppingEndpoint.*;
 
 @RestController(SHOPPING_ROOT)
 public class ShoppingController {

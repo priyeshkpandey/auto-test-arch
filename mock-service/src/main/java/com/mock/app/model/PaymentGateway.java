@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.EnumSet;
 
-import static com.mock.app.model.Endpoint.PaymentEndpoint.*;
-import static com.mock.app.model.Endpoint.PaymentGatewayEndpoint.PAYMENT_GATEWAY_ROOT;
-import static com.mock.app.model.Endpoint.PaymentGatewayEndpoint.RECEIVE;
+import static com.util.constant.Endpoint.PaymentEndpoint.*;
+import static com.util.constant.Endpoint.PaymentGatewayEndpoint.PAYMENT_GATEWAY_ROOT;
+import static com.util.constant.Endpoint.PaymentGatewayEndpoint.RECEIVE;
 
 
 public enum PaymentGateway {

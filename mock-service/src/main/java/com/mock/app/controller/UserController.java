@@ -9,8 +9,8 @@ import com.mock.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.mock.app.model.Endpoint.PathVariable.USER_ID;
-import static com.mock.app.model.Endpoint.UserEndpoint.*;
+import static com.util.constant.Endpoint.PathVariable.USER_ID;
+import static com.util.constant.Endpoint.UserEndpoint.*;
 
 @RestController(USER_ROOT)
 public class UserController {

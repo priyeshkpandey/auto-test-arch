@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.mock.app.model.Endpoint.PaymentGatewayEndpoint.PAYMENT_GATEWAY_ROOT;
-import static com.mock.app.model.Endpoint.PaymentGatewayEndpoint.RECEIVE;
+import static com.util.constant.Endpoint.PaymentGatewayEndpoint.PAYMENT_GATEWAY_ROOT;
+import static com.util.constant.Endpoint.PaymentGatewayEndpoint.RECEIVE;
 
 @RestController(PAYMENT_GATEWAY_ROOT)
 public class PaymentGatewayController {

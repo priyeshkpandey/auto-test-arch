@@ -9,9 +9,9 @@ import com.mock.docker.app.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.mock.docker.app.model.Endpoint.InventoryEndpoint.*;
-import static com.mock.docker.app.model.Endpoint.PathVariable.PRODUCT_ID;
-import static com.mock.docker.app.model.Endpoint.PathVariable.USER_ID;
+import static com.util.constant.Endpoint.InventoryEndpoint.*;
+import static com.util.constant.Endpoint.PathVariable.PRODUCT_ID;
+import static com.util.constant.Endpoint.PathVariable.USER_ID;
 
 @RestController(INVENTORY_ROOT)
 public class InventoryController {
