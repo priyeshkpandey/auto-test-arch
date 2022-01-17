@@ -17,6 +17,7 @@
         <module>webclient-api-client</module>
         <module>mock-service-docker</module>
         <module>common-util</module>
+        <module>gui-listener</module>
     </modules>
 
     <properties>
