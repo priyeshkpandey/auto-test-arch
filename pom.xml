@@ -18,6 +18,7 @@
         <module>mock-service-docker</module>
         <module>common-util</module>
         <module>gui-listener</module>
+        <module>protocol-interceptor-selenium</module>
     </modules>
 
     <properties>
