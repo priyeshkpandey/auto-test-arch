@@ -12,8 +12,7 @@
     <artifactId>mock-service-docker</artifactId>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>11</java.version>
         <start.class>com.mock.docker.app.main.ApplicationRunner</start.class>
         <spring.doc.version>1.6.0</spring.doc.version>
     </properties>

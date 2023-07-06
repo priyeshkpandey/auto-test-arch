@@ -12,8 +12,7 @@
     <artifactId>okhttp-api-client</artifactId>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
         <okhttp.version>4.9.3</okhttp.version>
     </properties>
 
