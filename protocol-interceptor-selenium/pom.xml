@@ -12,6 +12,8 @@
     <artifactId>protocol-interceptor-selenium</artifactId>
 
     <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.release>11</maven.compiler.release>
         <selenium.version>4.1.2</selenium.version>
         <littleproxy.version>2.0.7</littleproxy.version>
