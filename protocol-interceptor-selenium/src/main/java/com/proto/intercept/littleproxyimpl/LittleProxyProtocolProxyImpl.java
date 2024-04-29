@@ -6,10 +6,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.HttpObject;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
-import org.littleshoot.proxy.HttpFilters;
-import org.littleshoot.proxy.HttpFiltersAdapter;
-import org.littleshoot.proxy.HttpFiltersSourceAdapter;
-import org.littleshoot.proxy.HttpProxyServer;
+import org.littleshoot.proxy.*;
 import org.littleshoot.proxy.impl.DefaultHttpProxyServer;
 
 import java.io.IOException;
@@ -23,6 +20,7 @@ public class LittleProxyProtocolProxyImpl extends HttpFiltersSourceAdapter imple
     public void start() {
         this.server = DefaultHttpProxyServer.bootstrap()
                 .withPort(11000).withFiltersSource(this).start();
+
     }
 
     @Override

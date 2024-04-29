@@ -1,5 +1,6 @@
 package com.proto.gui.selenium.chrome;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,8 @@ public class ChromeDriverFactory {
     }
 
     private void initChromeDriverLocation() {
+        //WebDriverManager.chromedriver().setup();
+
         if (OS.contains("win")) {
             System.setProperty("webdriver.chrome.driver", CHROME_DRIVERS_DIR + WINDOWS_DRIVER_NAME);
         } else if (OS.contains("mac")) {
@@ -37,7 +40,8 @@ public class ChromeDriverFactory {
         chromeOptions.setAcceptInsecureCerts(true);
         chromeOptions.addArguments("--enable-javascript");
         chromeOptions.setProxy(proxy);
-        chromeOptions.setHeadless(true);
+        chromeOptions.setHeadless(false);
+        chromeOptions.addArguments("--remote-allow-origins=*");
         return chromeOptions;
     }
 }

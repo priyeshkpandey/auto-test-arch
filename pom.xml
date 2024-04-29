@@ -20,6 +20,7 @@
         <module>gui-listener</module>
         <module>protocol-interceptor-selenium</module>
         <module>properties-scaling-util</module>
+        <module>apns-simulator-http2</module>
     </modules>
 
     <properties>

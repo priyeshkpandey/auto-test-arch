@@ -2,12 +2,15 @@ package com.proto.test.gui.traffic;
 
 import com.proto.gui.selenium.chrome.ChromeDriverFactory;
 import com.proto.intercept.ProtocolProxyFactory;
+import com.proto.intercept.browsermobproxyimpl.BrowserMobProxyProtocolProxyImpl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class ProtoTrafficCaptureTest {
     private static final ChromeDriverFactory chromeDriverFactory = new ChromeDriverFactory();
@@ -17,7 +20,8 @@ public class ProtoTrafficCaptureTest {
     @BeforeClass
     public void setupBeforeClass(ITestContext context) {
         this.driver = chromeDriverFactory.getChromeDriver();
-        ProtocolProxyFactory.getProtocolProxy().start();
+        //ProtocolProxyFactory.getLittleProxyProtocolProxy().start();
+        ProtocolProxyFactory.getBrowserMobProxyProtocolProxy().start();
         context.setAttribute("driver", this.driver);
     }
 
@@ -30,9 +34,11 @@ public class ProtoTrafficCaptureTest {
     }
 
     @AfterClass
-    private void setupAfterClass(ITestContext context) {
+    private void setupAfterClass(ITestContext context) throws IOException {
         this.driver = (WebDriver) context.getAttribute("driver");
         this.driver.quit();
-        ProtocolProxyFactory.getProtocolProxy().stop();
+        //ProtocolProxyFactory.getLittleProxyProtocolProxy().stop();
+        ProtocolProxyFactory.getBrowserMobProxyProtocolProxy().stop();
+        ((BrowserMobProxyProtocolProxyImpl)ProtocolProxyFactory.getBrowserMobProxyProtocolProxy()).saveHAR();
     }
 }
